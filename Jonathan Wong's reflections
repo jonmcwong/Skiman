@@ -1,0 +1,25 @@
+Jonathan Wong's Reflecions
+
+~Instructions~
+When compiling this project, please use the -std=c++11 flag
+This game will also only work on Linux due to the headers being used.
+
+~Intro~
+I have made a simple game. I have implemented a refreshing screen into my game, alongside real time input.
+To accomplish this, I used the header <termios.h> which should be found in all compuers with Ubuntu
+
+~Unbuffered input~
+The unbuffered input was created by setting the terminal to noncanonical mode and switching echo off.
+In the main part of the game, I also set VMIN (in the termios structure) to 0; telling the computer to wait for at least 0 bytes before it moved on. This setting allows me to get a character if there is something in the input buffer, or move on without waiting if it is empty. This is something that -as far as I know- cannot be achieved with anything in the standard library.
+
+~The refreshing screen~
+To create the refreshing screen, I wrote a function that made and updated a vector of "objects". 
+The Struct object is built from the types int and string. This is to allow for the print_screen() function to know what the item looks like and where to print it along the line.
+The vector refreshes by adding a new object at the beginning of the vectr every frame and deleting the object at the end of the vector. 
+When this vector is printed at a fast enough rate with each object as a new line, the items on the screen appear to travel downwards.
+
+~Global variables~
+Since I have many functions that alter the same variables, I thought it would be easier to declare these variables as global. Most of the local variables are simply counters. 
+
+~Evaluation~
+If I had more time, I would spend it making this game more portable. I would do this by creating an alternative method to create the unbuffered input using functions found in windows. This would be alongside the method using termios and the program would decide which method to use depending on which operating system it was using.
